@@ -7,4 +7,5 @@ public class StatementRequest {
     private String titulo;
     private String contenidoLargo;
     private Long userId;
+    private String userNane;
 }

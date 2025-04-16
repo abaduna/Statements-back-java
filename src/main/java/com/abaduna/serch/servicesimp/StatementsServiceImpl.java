@@ -4,6 +4,7 @@ package com.abaduna.serch.servicesimp;
 
 import com.abaduna.serch.models.StatementRequest;
 import com.abaduna.serch.models.Statements;
+import com.abaduna.serch.models.User;
 import com.abaduna.serch.repository.StatementsRepository;
 import com.abaduna.serch.repository.UserRepository;
 import com.abaduna.serch.services.StatementsService;
@@ -39,10 +40,25 @@ public class StatementsServiceImpl implements StatementsService {
         s.setContenidoLargo(request.getContenidoLargo());
 
         if (request.getUserId() != null) {
-            userRepository.findById(request.getUserId()).ifPresent(s::setUser);
+            userRepository.findById(request.getUserId())
+                    .ifPresent(s::setUser);
+        } else if (request.getUserNane() != null) {
+            User newUser = new User();
+            newUser.setName(request.getUserNane());
+
+            userRepository.save(newUser);
+            s.setUser(newUser);
         }
+        System.out.println("UserId: " + request.getUserId());
+        System.out.println("UserName: " + request.getUserNane());
+
+
+
 
         return statementsRepository.save(s);
+    }
+    public List<Statements> getStatementsByUserName(String name) {
+        return statementsRepository.findByUser_NameContainingIgnoreCase(name);
     }
 
     @Override

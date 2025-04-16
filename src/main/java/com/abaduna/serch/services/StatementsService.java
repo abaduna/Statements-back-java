@@ -11,4 +11,5 @@ public interface StatementsService {
     Optional<Statements> getStatementById(Long id);
     Statements createStatement(StatementRequest request);
     boolean deleteStatement(Long id);
+    List<Statements> getStatementsByUserName(String name);
 }

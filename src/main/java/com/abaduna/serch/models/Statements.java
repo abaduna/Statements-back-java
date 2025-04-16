@@ -17,6 +17,6 @@ public class Statements {
     @Column(columnDefinition = "TEXT")
     private String contenidoLargo;
     @ManyToOne
-    @JoinColumn(name = "user_id")
+
     private User user;
 }

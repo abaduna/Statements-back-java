@@ -21,8 +21,12 @@ public class StatementsController {
     private StatementsService statementsService;
 
     @GetMapping
-    public List<Statements> getAllStatements() {
-        return statementsService.getAllStatements();
+    public List<Statements> getAllStatements(@RequestParam(required = false) String name) {
+        if (name != null && !name.isEmpty()) {
+            return statementsService.getStatementsByUserName(name);
+        } else {
+            return statementsService.getAllStatements();
+        }
     }
 
     @GetMapping("/{id}")
